@@ -66,7 +66,7 @@ void setup() {
   }
   //----------------------OSC-----------------------------
   osc = new OscP5(this, 7001);
-  locacionRemota =  new NetAddress("127.0.0.1", 7000);
+  locacionRemota =  new NetAddress("127.0.0.1", 7000); // NetAdress(IP LOCAL, PUERTO QUE EN EL QUE ESTA RECIBIENDO MENSAJES RESOLUME)
 
   //--------------------openCV----------------------------
   video = new Capture(this, "pipeline:autovideosrc");
@@ -186,9 +186,9 @@ if(mensajeRecibido>  && mensajeRecibido< || mensajeRecibido>  && mensajeRecibido
     } else if (valorResistencia>0) {
       tiempoLira=millis();
       segundosLira = 0;
-      OscMessage reproducirVideo = new OscMessage("/composition/selectedclip/transport/position/behaviour/playdirection");
-      reproducirVideo.add(2);
-      osc.send(reproducirVideo, locacionRemota);
+      OscMessage reproducirVideo = new OscMessage("/composition/selectedclip/transport/position/behaviour/playdirection"); //ESTA ES LA DECLARACION DE UN MENSAJE OSC, LO QUE ESTA ENTRE COMILLAS LO SACAS DE RESOLUME
+      reproducirVideo.add(2);//EL .add AGREGA UNA VARIABLE AL MENSAJE DE ARRIBA, EN ESTE CASO "2" RESOLUME LO INTERPRETA COMO REPRODUCIR VIDEO
+      osc.send(reproducirVideo, locacionRemota); //ENVIO EL MENSAJE A RESOLUME
     }
   } else if (miroAlFrente==true) {
     OscMessage reproducirVideo = new OscMessage("/composition/selectedclip/transport/position/behaviour/playdirection");
